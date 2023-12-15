@@ -2,6 +2,8 @@ package org.delivery.api.domain.user.business;
 
 import lombok.RequiredArgsConstructor;
 import org.delivery.api.common.annotation.Business;
+import org.delivery.api.domain.token.business.TokenBusiness;
+import org.delivery.api.domain.token.controller.model.TokenResponse;
 import org.delivery.api.domain.user.controller.model.UserLoginRequest;
 import org.delivery.api.domain.user.controller.model.UserRegisterRequest;
 import org.delivery.api.domain.user.controller.model.UserResponse;
@@ -14,6 +16,8 @@ public class UserBusiness {
 
     private final UserService userService;
     private final UserConvertor userConvertor;
+
+    private final TokenBusiness tokenBusiness;
 
     /**
      * 사용자에 대한 가입처리 로직
@@ -42,12 +46,11 @@ public class UserBusiness {
      * 1. email, password를 갖고 사용자 확인
      * 2. user entity 로그인 확인
      * 3. token 생성
-     * 4. token 응답
+     * 4. token response 응답
      */
-    public UserResponse login(UserLoginRequest body) {
+    public TokenResponse login(UserLoginRequest body) {
         var userEntity = userService.login(body.getEmail(), body.getPassword());
-        // 사용자 없으면 throw
-        // TODO 토큰 생성
-        return userConvertor.toResponse(userEntity);
+        var tokenResponse = tokenBusiness.issueToken(userEntity);
+        return tokenResponse;
     }
 }
