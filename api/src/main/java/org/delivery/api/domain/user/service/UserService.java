@@ -29,4 +29,14 @@ public class UserService {
 
         return userRepository.save(entity);
     }
+
+    public UserEntity login(String email, String password) {
+        return userRepository.findFirstByEmailAndPassword(email, password)
+                .orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT, "유저가 없습니다."));
+    }
+
+    public UserEntity getUser(String email, String password) {
+    return userRepository.findFirstByEmailAndPasswordAndStatusOrderByIdDesc(email, password, UserStatus.REGISTERED)
+            .orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT, "유저가 없습니다."));
+    }
 }
