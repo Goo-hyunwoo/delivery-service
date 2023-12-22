@@ -2,8 +2,10 @@ package org.delivery.api.domain.user.business;
 
 import lombok.RequiredArgsConstructor;
 import org.delivery.api.common.annotation.Business;
+import org.delivery.api.common.annotation.UserSession;
 import org.delivery.api.domain.token.business.TokenBusiness;
 import org.delivery.api.domain.token.controller.model.TokenResponse;
+import org.delivery.api.domain.user.controller.model.User;
 import org.delivery.api.domain.user.controller.model.UserLoginRequest;
 import org.delivery.api.domain.user.controller.model.UserRegisterRequest;
 import org.delivery.api.domain.user.controller.model.UserResponse;
@@ -58,11 +60,8 @@ public class UserBusiness {
         return tokenResponse;
     }
 
-    public UserResponse me() {
-        var requestContext = Objects.requireNonNull(RequestContextHolder.getRequestAttributes());
-        var userId = requestContext.getAttribute("userId", RequestAttributes.SCOPE_REQUEST);
-
-        var userEntity = userService.getUserWithThrow(Long.parseLong(userId.toString()));
+    public UserResponse me(User user) {
+        var userEntity = userService.getUserWithThrow(user.getId());
         var response = userConvertor.toResponse(userEntity);
         return response;
     }
