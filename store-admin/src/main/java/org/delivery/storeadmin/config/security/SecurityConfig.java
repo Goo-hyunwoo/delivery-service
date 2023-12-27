@@ -40,8 +40,7 @@ public class SecurityConfig {
     
     @Bean
     public PasswordEncoder passwordEncoder() {
-        // hash + sort 암호화
-        return new BCryptPasswordEncoder();
+        return new BCryptPasswordEncoder();        // hash + sort 암호화
     }
 
 }
