@@ -11,6 +11,7 @@ import org.delivery.api.domain.userorder.controller.model.UserOrderDetailRespons
 import org.delivery.api.domain.userorder.controller.model.UserOrderRequest;
 import org.delivery.api.domain.userorder.controller.model.UserOrderResponse;
 import org.delivery.api.domain.userorder.convertor.UserOrderConvertor;
+import org.delivery.api.domain.userorder.producer.UserOrderProducer;
 import org.delivery.api.domain.userorder.service.UserOrderService;
 import org.delivery.api.domain.userordermenu.convertor.UserOrderMenuConvertor;
 import org.delivery.api.domain.userordermenu.service.UserOrderMenuService;
@@ -35,6 +36,8 @@ public class UserOrderBusiness {
     private final StoreMenuConvertor storeMenuConvertor;
     private final StoreConvertor storeConvertor;
 
+    private final UserOrderProducer userOrderProducer;
+
 
     public UserOrderResponse userOrder(User user, UserOrderRequest body ) {
 
@@ -52,6 +55,8 @@ public class UserOrderBusiness {
                     var userOrderMenuEntity = userOrderMenuConvertor.toEntity(savedUserOrderEntity, it);
                     userOrderMenuService.order(userOrderMenuEntity);
                 });
+
+        userOrderProducer.sendOrder(userOrderEntity);
 
         return userOrderConvertor.toResponse(userOrderEntity);
     }
