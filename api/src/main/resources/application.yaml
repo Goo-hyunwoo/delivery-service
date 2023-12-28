@@ -11,6 +11,11 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: pix123!
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: admin
+    password: admin123!@#
 
 token:
   secret:
