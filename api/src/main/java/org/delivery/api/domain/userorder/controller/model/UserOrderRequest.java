@@ -11,6 +11,9 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserOrderRequest {
+
+    @NotNull
+    private Long storeId;
     @NotNull
     private List<Long> storeMenuIdList;
 }

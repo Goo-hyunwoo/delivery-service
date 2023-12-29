@@ -22,6 +22,8 @@ import java.time.LocalDateTime;
 public class UserOrderEntity extends BaseEntity {
     @Column(name = "user_id", nullable = false)
     private Long userId;
+    @Column(name = "store_id", nullable = false)
+    private Long storeId;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)

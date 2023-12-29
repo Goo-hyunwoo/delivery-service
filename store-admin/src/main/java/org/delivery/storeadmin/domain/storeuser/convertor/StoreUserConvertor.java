@@ -1,14 +1,12 @@
-package org.delivery.storeadmin.domain.user.convertor;
+package org.delivery.storeadmin.domain.storeuser.convertor;
 
 import lombok.RequiredArgsConstructor;
 import org.delivery.db.store.StoreEntity;
-import org.delivery.db.store.StoreRepository;
-import org.delivery.db.store.enums.StoreStatus;
 import org.delivery.db.storeuser.StoreUserEntity;
 import org.delivery.storeadmin.common.annotation.Convertor;
 import org.delivery.storeadmin.domain.authorization.model.UserSession;
-import org.delivery.storeadmin.domain.user.controller.model.StoreUserRegisterRequest;
-import org.delivery.storeadmin.domain.user.controller.model.StoreUserResponse;
+import org.delivery.storeadmin.domain.storeuser.controller.model.StoreUserRegisterRequest;
+import org.delivery.storeadmin.domain.storeuser.controller.model.StoreUserResponse;
 
 @RequiredArgsConstructor
 @Convertor
